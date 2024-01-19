@@ -1,0 +1,14 @@
+{
+  "extends": ["next/core-web-vitals", "prettier"],
+  "plugins": ["import-helpers"],
+  "rules": {
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": ["/^react/", "module", ["parent", "index"]],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ]
+  }
+}
