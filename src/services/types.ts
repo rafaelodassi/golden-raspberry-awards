@@ -32,3 +32,37 @@ export type WinByYearRes = {
   producers: string[];
   winner: boolean;
 }[];
+
+interface Sort {
+  unsorted: boolean;
+  sorted: boolean;
+  empty: boolean;
+}
+
+export interface ListMoviesRes {
+  content: {
+    id: number;
+    year: number;
+    title: string;
+    studios: string[];
+    producers: string[];
+    winner: boolean;
+  }[];
+  pageable: {
+    sort: Sort;
+    offset: number;
+    pageSize: number;
+    pageNumber: number;
+    paged: boolean;
+    unpaged: boolean;
+  };
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  size: number;
+  number: number;
+  sort: Sort;
+  first: boolean;
+  numberOfElements: number;
+  empty: boolean;
+}
