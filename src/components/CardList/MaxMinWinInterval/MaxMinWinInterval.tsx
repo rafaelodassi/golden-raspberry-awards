@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 
 import { useData } from '../../../hooks/useData';
 import { MaxMinWinIntervalRes } from '../../../services/types';
-import TableList from '../../TableList';
+import TableList, { Columns } from '../../TableList';
 
 const MaxMinWinInterval = () => {
   const { data, loading, error } = useData<MaxMinWinIntervalRes>(
@@ -12,25 +12,23 @@ const MaxMinWinInterval = () => {
     { method: 'GET' }
   );
 
-  const columns = [
-    { key: 'producer', dataIndex: 'producer', title: 'Produtor', width: '200' },
+  const columns: Columns[] = [
+    { key: 'producer', dataIndex: 'producer', title: 'Produtor' },
     {
       key: 'interval',
       dataIndex: 'interval',
       title: 'Intervalo',
-      width: '200',
+      width: 'sm',
     },
     {
       key: 'previousWin',
       dataIndex: 'previousWin',
       title: 'Ano anterior',
-      width: '200',
     },
     {
       key: 'followingWin',
       dataIndex: 'followingWin',
       title: 'Ano seguinte',
-      width: '200',
     },
   ];
 

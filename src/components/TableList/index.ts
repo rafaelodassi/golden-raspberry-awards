@@ -1,3 +1,2 @@
-import TableList from './TableList';
-
-export default TableList;
+export { default } from './TableList';
+export type { Columns } from './TableList';

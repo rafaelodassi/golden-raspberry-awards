@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 
 import { useData } from '../../../hooks/useData';
 import { YearsMultipleWinRes } from '../../../services/types';
-import TableList from '../../TableList';
+import TableList, { Columns } from '../../TableList';
 
 const YearsMultipleWin = () => {
   const { data, loading, error } = useData<YearsMultipleWinRes>(
@@ -12,8 +12,8 @@ const YearsMultipleWin = () => {
     { method: 'GET' }
   );
 
-  const columns = [
-    { key: 'year', dataIndex: 'year', title: 'Ano' },
+  const columns: Columns[] = [
+    { key: 'year', dataIndex: 'year', title: 'Ano', width: 'sm' },
     {
       key: 'winnerCount',
       dataIndex: 'winnerCount',

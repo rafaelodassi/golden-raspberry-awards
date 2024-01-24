@@ -7,28 +7,40 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
+type ColumnWidth = 'sm' | 'base' | 'lg' | undefined;
+
+export interface Columns {
+  key: string;
+  dataIndex: string;
+  title: string;
+  width?: ColumnWidth;
+}
+
 interface Props {
-  columns: {
-    key: string;
-    dataIndex: string;
-    title: string;
-    width?: string;
-  }[];
+  columns: Columns[];
   dataSource: {
     [key: string]: string | number;
   }[];
 }
 
 const TableList = ({ columns = [], dataSource = [] }: Props) => {
+  const buildClassNameWidth = (width?: ColumnWidth) => {
+    switch (width) {
+      case 'sm':
+        return 'w-[100px]';
+      case 'lg':
+        return 'w-[300px]';
+      default:
+        return '';
+    }
+  };
+
   return (
     <Table>
       <TableHeader>
         <TableRow>
           {columns.map((col) => (
-            <TableHead
-              key={col.key}
-              className={`w-[${col.width ? `${col.width}px` : 'auto'}]`}
-            >
+            <TableHead key={col.key} className={buildClassNameWidth(col.width)}>
               {col.title}
             </TableHead>
           ))}
@@ -38,10 +50,7 @@ const TableList = ({ columns = [], dataSource = [] }: Props) => {
         {dataSource.map((data) => (
           <TableRow key={data.key}>
             {columns.map((col) => (
-              <TableCell
-                key={`${data.key}-${col.key}`}
-                className={`w-[${col.width ? `${col.width}px` : 'auto'}]`}
-              >
+              <TableCell key={`${data.key}-${col.key}`}>
                 {data[col.dataIndex]}
               </TableCell>
             ))}

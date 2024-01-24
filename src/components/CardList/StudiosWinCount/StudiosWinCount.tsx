@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 
 import { useData } from '../../../hooks/useData';
 import { StudiosWinCountRes } from '../../../services/types';
-import TableList from '../../TableList';
+import TableList, { Columns } from '../../TableList';
 
 const StudiosWinCount = () => {
   const { data, loading, error } = useData<StudiosWinCountRes>(
@@ -12,9 +12,13 @@ const StudiosWinCount = () => {
     { method: 'GET' }
   );
 
-  const columns = [
+  const columns: Columns[] = [
     { key: 'name', dataIndex: 'name', title: 'Nome' },
-    { key: 'winCount', dataIndex: 'winCount', title: 'Contagem de vitórias' },
+    {
+      key: 'winCount',
+      dataIndex: 'winCount',
+      title: 'Contagem de vitórias',
+    },
   ];
 
   return (
