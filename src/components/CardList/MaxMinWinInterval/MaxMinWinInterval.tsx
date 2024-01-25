@@ -37,34 +37,32 @@ const MaxMinWinInterval = () => {
       <h1 className='font-semibold text-lg mb-3 px-1'>
         Os produtores com maior e menor intervalo entre vitórias
       </h1>
+      <div className='flex items-center justify-center gap-5 mb-4'>
+        <h1 className='font-medium text-base text-gray-600 flex-1'>Máximo</h1>
+        <h1 className='font-medium text-base text-gray-600 flex-1'>Mínimo</h1>
+      </div>
       <div className='flex items-center justify-center gap-5'>
         <div className='flex-1'>
-          <h1 className='font-medium text-base mb-2 px-1 text-gray-600'>
-            Máximo
-          </h1>
-          <div className='border flex-1 rounded-md'>
+          <div className={`${!loading ? `border` : ``} rounded-md p-3`}>
             <TableList
+              loading={loading}
               columns={columns}
-              dataSource={
-                data
-                  ? data?.max.map((m, i) => ({ ...m, key: (i + 1).toString() }))
-                  : []
-              }
+              dataSource={data?.max.map((m, i) => ({
+                ...m,
+                key: (i + 1).toString(),
+              }))}
             />
           </div>
         </div>
         <div className='flex-1'>
-          <h1 className='font-medium text-base mb-2 px-1 text-gray-600'>
-            Mínimo
-          </h1>
-          <div className='border rounded-md'>
+          <div className={`${!loading ? `border` : ``} rounded-md p-3`}>
             <TableList
+              loading={loading}
               columns={columns}
-              dataSource={
-                data
-                  ? data?.min.map((m, i) => ({ ...m, key: (i + 1).toString() }))
-                  : []
-              }
+              dataSource={data?.min.map((m, i) => ({
+                ...m,
+                key: (i + 1).toString(),
+              }))}
             />
           </div>
         </div>

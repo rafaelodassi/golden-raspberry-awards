@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
 import { useData } from '../../../hooks/useData';
@@ -6,6 +9,10 @@ import Filter from '../../Filter';
 import TableList from '../../TableList';
 
 const WinByYear = () => {
+  const [filters, setFilters] = useState({
+    year: '',
+  });
+
   const { data, loading, error, reFetchData } = useData<WinByYearRes>(
     '?winner=true&year=2024',
     { method: 'GET' }
@@ -28,26 +35,40 @@ const WinByYear = () => {
         <h1 className='font-semibold text-lg flex-1 px-1'>
           Lista dos filmes vencedores por ano
         </h1>
-        <Filter
-          placeholder='Selecione um ano'
-          options={years}
-          onChange={(value) => reFetchData(`?winner=true&year=${value}`)}
-        />
+        <div className='flex items-center justify-center gap-3'>
+          <Button
+            onClick={() => {
+              setFilters({
+                year: '',
+              });
+
+              reFetchData(`?winner=true&year=2024`);
+            }}
+          >
+            Limpar filtros
+          </Button>
+          <Filter
+            value={filters.year}
+            placeholder='Selecione um ano'
+            options={years}
+            onChange={(value) => {
+              const currentValue = value === filters.year ? '' : value;
+
+              setFilters({ ...filters, year: currentValue });
+              reFetchData(`?winner=true&year=${currentValue}`);
+            }}
+          />
+        </div>
       </div>
-      {data && !!data.length ? (
-        <TableList
-          columns={columns}
-          dataSource={data?.map((d) => ({
-            key: d.id.toString(),
-            title: d.title,
-            year: d.year,
-          }))}
-        />
-      ) : (
-        <p className='text-center text-gray-500 text-sm mb-3'>
-          Nenhum filme encontrado
-        </p>
-      )}
+      <TableList
+        loading={loading}
+        columns={columns}
+        dataSource={data?.map((d) => ({
+          key: d.id.toString(),
+          title: d.title,
+          year: d.year,
+        }))}
+      />
     </Card>
   );
 };

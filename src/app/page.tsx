@@ -11,7 +11,7 @@ import WinByYear from '../components/CardList/WinByYear';
 import YearsMultipleWin from '../components/CardList/YearsMultipleWin';
 
 export default function Home() {
-  const [preview, setPreview] = useState<'dashboard' | 'list'>('list');
+  const [preview, setPreview] = useState<'dashboard' | 'list'>('dashboard');
 
   return (
     <main className='h-screen relative'>

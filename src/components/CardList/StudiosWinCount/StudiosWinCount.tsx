@@ -27,15 +27,12 @@ const StudiosWinCount = () => {
         Os três estúdios com mais vitórias
       </h1>
       <TableList
+        loading={loading}
         columns={columns}
-        dataSource={
-          data
-            ? data?.studios.slice(0, 3).map((s, i) => ({
-                ...s,
-                key: (i + 1).toString(),
-              }))
-            : []
-        }
+        dataSource={data?.studios.slice(0, 3).map((s, i) => ({
+          ...s,
+          key: (i + 1).toString(),
+        }))}
       />
     </Card>
   );

@@ -1,3 +1,4 @@
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -17,13 +18,20 @@ export interface Columns {
 }
 
 interface Props {
-  columns: Columns[];
-  dataSource: {
+  loading?: boolean;
+  columns?: Columns[];
+  dataSource?: {
     [key: string]: string | number;
   }[];
+  dataNotFound?: React.ReactNode;
 }
 
-const TableList = ({ columns = [], dataSource = [] }: Props) => {
+const TableList = ({
+  loading = false,
+  columns,
+  dataSource,
+  dataNotFound,
+}: Props) => {
   const buildClassNameWidth = (width?: ColumnWidth) => {
     switch (width) {
       case 'sm':
@@ -35,11 +43,38 @@ const TableList = ({ columns = [], dataSource = [] }: Props) => {
     }
   };
 
-  return (
+  if (loading || !dataSource) {
+    return (
+      <div className='flex flex-col gap-4'>
+        <div className='flex gap-4'>
+          <Skeleton className='h-4 w-full' />
+          <Skeleton className='h-4 w-full' />
+          <Skeleton className='h-4 w-full' />
+          <Skeleton className='h-4 w-full' />
+        </div>
+        <Skeleton className='h-4 w-full' />
+        <Skeleton className='h-4 w-full' />
+        <Skeleton className='h-4 w-full' />
+        <Skeleton className='h-4 w-full' />
+      </div>
+    );
+  }
+
+  const renderDataNotFound = () => {
+    return (
+      dataNotFound || (
+        <p className='text-center text-gray-500 text-sm mb-3'>
+          Nenhum dado encontrado
+        </p>
+      )
+    );
+  };
+
+  return !!dataSource.length ? (
     <Table>
       <TableHeader>
         <TableRow>
-          {columns.map((col) => (
+          {columns?.map((col) => (
             <TableHead key={col.key} className={buildClassNameWidth(col.width)}>
               {col.title}
             </TableHead>
@@ -47,9 +82,9 @@ const TableList = ({ columns = [], dataSource = [] }: Props) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {dataSource.map((data) => (
+        {dataSource?.map((data) => (
           <TableRow key={data.key}>
-            {columns.map((col) => (
+            {columns?.map((col) => (
               <TableCell key={`${data.key}-${col.key}`}>
                 {data[col.dataIndex]}
               </TableCell>
@@ -58,6 +93,8 @@ const TableList = ({ columns = [], dataSource = [] }: Props) => {
         ))}
       </TableBody>
     </Table>
+  ) : (
+    renderDataNotFound()
   );
 };
 

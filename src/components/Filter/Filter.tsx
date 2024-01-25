@@ -22,6 +22,7 @@ interface Props {
   placeholder?: string;
   options: { value: string; label: string }[];
   onChange: (value: string) => void;
+  value?: string;
 }
 
 const Filter = ({
@@ -29,9 +30,11 @@ const Filter = ({
   placeholder = 'Selecione uma opção',
   options,
   onChange,
+  value,
 }: Props) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('');
+  const [valueFilter, setValue] = useState('');
+  const current = typeof value === 'string' ? value : valueFilter;
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -42,7 +45,9 @@ const Filter = ({
           aria-expanded={open}
           className='w-[200px] justify-between'
         >
-          {value ? options.find((o) => o.value === value)?.label : placeholder}
+          {current
+            ? options.find((o) => o.value === current)?.label
+            : placeholder}
           <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
         </Button>
       </PopoverTrigger>
@@ -59,7 +64,7 @@ const Filter = ({
                   key={o.value}
                   value={o.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? '' : currentValue);
+                    setValue(currentValue === current ? '' : currentValue);
                     setOpen(false);
                     onChange(currentValue);
                   }}
@@ -67,7 +72,7 @@ const Filter = ({
                   <Check
                     className={cn(
                       'mr-2 h-4 w-4',
-                      value === o.value ? 'opacity-100' : 'opacity-0'
+                      current === o.value ? 'opacity-100' : 'opacity-0'
                     )}
                   />
                   {o.label}

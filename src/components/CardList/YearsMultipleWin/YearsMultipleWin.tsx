@@ -27,15 +27,12 @@ const YearsMultipleWin = () => {
         Lista dos anos com mais de um vencedor
       </h1>
       <TableList
+        loading={loading}
         columns={columns}
-        dataSource={
-          data
-            ? data?.years.map((y, i) => ({
-                ...y,
-                key: (i + 1).toString(),
-              }))
-            : []
-        }
+        dataSource={data?.years.map((y, i) => ({
+          ...y,
+          key: (i + 1).toString(),
+        }))}
       />
     </Card>
   );
