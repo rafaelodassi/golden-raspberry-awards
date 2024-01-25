@@ -33,16 +33,16 @@ const MaxMinWinInterval = () => {
   ];
 
   return (
-    <Card className='flex-1 p-4'>
+    <Card className='flex-1 p-4 w-full'>
       <h1 className='font-semibold text-lg mb-3 px-1'>
         Os produtores com maior e menor intervalo entre vitórias
       </h1>
-      <div className='flex items-center justify-center gap-5 mb-4'>
+      <div className='flex items-center justify-center gap-5 mb-4 max-md:hidden'>
         <h1 className='font-medium text-base text-gray-600 flex-1'>Máximo</h1>
         <h1 className='font-medium text-base text-gray-600 flex-1'>Mínimo</h1>
       </div>
-      <div className='flex items-center justify-center gap-5'>
-        <div className='flex-1'>
+      <div className='flex items-center justify-center gap-5 max-md:flex-col'>
+        <div className='flex-1 w-full'>
           <div className={`${!loading ? `border` : ``} rounded-md p-3`}>
             <TableList
               loading={loading}
@@ -54,7 +54,7 @@ const MaxMinWinInterval = () => {
             />
           </div>
         </div>
-        <div className='flex-1'>
+        <div className='flex-1 w-full'>
           <div className={`${!loading ? `border` : ``} rounded-md p-3`}>
             <TableList
               loading={loading}

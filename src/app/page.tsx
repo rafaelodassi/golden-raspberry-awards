@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { LayoutDashboard, AlignJustify } from 'lucide-react';
 import Image from 'next/image';
 
 import ListMovies from '../components/CardList/ListMovies';
@@ -14,10 +15,9 @@ export default function Home() {
   const [preview, setPreview] = useState<'dashboard' | 'list'>('dashboard');
 
   return (
-    <main className='h-screen relative'>
-      <header className='h-48 bg-gray-950' />
-      <main className='px-16 pb-14 absolute top-8 w-full'>
-        <div className='flex justify-between items-center'>
+    <main className='h-screen flex flex-col'>
+      <header className='bg-gray-950 px-16 pt-10 shadow-[0_2px_9px_0px_rgba(0,0,0,0.45)] max-md:px-8'>
+        <div className='flex flex-col gap-5 items-start justify-center max-md:items-center'>
           <div className='flex items-center justify-center gap-3'>
             <Image
               className='invert'
@@ -33,29 +33,29 @@ export default function Home() {
           <div className='flex items-center justify-center gap-2'>
             <button
               onClick={() => setPreview('dashboard')}
-              className={`rounded-full px-5 h-9 text-white text-sm transition-all ${
-                preview === 'dashboard'
-                  ? `bg-white/15`
-                  : `hover:text-white/50 bg-transparent`
+              className={`px-5 text-white text-sm transition-[color] bg-transparent hover:text-white/50 h-[50px] flex items-center justify-center gap-2 border-b-4 border-transparent ${
+                preview === 'dashboard' ? `border-white/80` : ``
               }`}
             >
+              <LayoutDashboard />
               Dashboard
             </button>
             <button
               onClick={() => setPreview('list')}
-              className={`rounded-full px-5 h-9 text-white text-sm transition-all ${
-                preview === 'list'
-                  ? `bg-white/15`
-                  : `hover:text-white/50 bg-transparent`
+              className={`px-5 text-white text-sm transition-[color] bg-transparent hover:text-white/50 h-[50px] flex items-center justify-center gap-2 border-b-4 border-transparent ${
+                preview === 'list' ? `border-white/80` : ``
               }`}
             >
+              <AlignJustify />
               Lista
             </button>
           </div>
         </div>
+      </header>
+      <main className='px-16 py-10 w-full flex-1 overflow-y-auto overflow-x-hidden max-md:px-8'>
         {preview === 'dashboard' ? (
           <>
-            <div className='flex mt-6 items-center justify-center gap-5'>
+            <div className='flex items-center justify-center gap-5 max-md:flex-col'>
               <YearsMultipleWin />
               <StudiosWinCount />
             </div>
@@ -67,9 +67,7 @@ export default function Home() {
             </div>
           </>
         ) : (
-          <div className='mt-6'>
-            <ListMovies />
-          </div>
+          <ListMovies />
         )}
       </main>
     </main>

@@ -30,8 +30,8 @@ const WinByYear = () => {
   }
 
   return (
-    <Card className='flex-1 p-4'>
-      <div className='flex items-center justify-center mb-3'>
+    <Card className='flex-1 p-4 w-full'>
+      <div className='flex items-center justify-center mb-3 gap-2 max-md:flex-col'>
         <h1 className='font-semibold text-lg flex-1 px-1'>
           Lista dos filmes vencedores por ano
         </h1>

@@ -22,7 +22,7 @@ const StudiosWinCount = () => {
   ];
 
   return (
-    <Card className='flex-1 p-4'>
+    <Card className='flex-1 p-4 w-full'>
       <h1 className='font-semibold text-lg mb-3 px-1'>
         Os três estúdios com mais vitórias
       </h1>
