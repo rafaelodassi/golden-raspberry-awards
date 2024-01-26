@@ -4,7 +4,7 @@ Framboesa de Ouro é um prêmio cinematográfico humorístico dos Estados Unidos
 
 ## 📦 Acesse o projeto
 
-Acesse o projeto hospedado na Vercel: https://golden-raspberry-awards.app/
+Acesse o projeto hospedado na Vercel: https://golden-raspberry-awards-phi.vercel.app/
 
 ## 🚀 Começando
 
